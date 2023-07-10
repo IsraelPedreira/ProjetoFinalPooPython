@@ -1,4 +1,5 @@
 from Endereco import Endereco
+from Agenda import Agenda
 class Imovel:
 
     def __init__(self, numeroIPTU: float, rua: str, numero: int, cep: str, tipo: str, utilizacao: str,estado: str = 'BA', cidade: str='Salvador') -> None:
@@ -6,6 +7,7 @@ class Imovel:
         self._tipo: str = tipo
         self._utilizacao: str = utilizacao
         self._endereco: Endereco = Endereco(rua, numero, cep, estado, cidade)
+        self._agenda = Agenda()
 
     @property
     def endereco(self) -> Endereco:
@@ -38,6 +40,17 @@ class Imovel:
     @utilizacao.setter
     def utilizacao(self, valor: str):
         self._utilizacao = valor
+
+    def alugarImovel(self, data: str) -> bool:
+        self._agenda.adicionar_data_alugado(data)
+        return True
+
+    def estaDisponivel(self, data) -> bool:
+        if self._agenda.obter_estado(data):
+            return True
+
+        return False
+
 
 
 

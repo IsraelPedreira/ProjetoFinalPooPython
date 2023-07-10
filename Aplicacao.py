@@ -26,13 +26,14 @@ class Aplicacao:
 
         imovel: Imovel = Imovel(valorIPTU, rua, numero, cep, tipo, utilizacao, estado, cidade)
 
-        print("Digite o cpf do proprietário")
-        cpf: str = input()
-
-
-        for proprietario in Aplicacao.listaProprietarios:
-            if(proprietario.cpf == cpf):
-                proprietario.adicionarImovel(imovel)
+        print("Deseja adicionar um proprietário a este imóvel ? [S/N]")
+        respostaProprietario = input()
+        if respostaProprietario == "S":
+            print("Digite o cpf do proprietário")
+            cpf: str = input()
+            for proprietario in Aplicacao.listaProprietarios:
+                if proprietario.cpf == cpf:
+                    proprietario.adicionarImovel(imovel)
 
 
 
@@ -75,6 +76,21 @@ class Aplicacao:
                     index+=1
 
     @staticmethod
+    def alugaImovel()->None:
+        print("Digite o cpf do proprietario que deseja alugar a residência")
+        cpf: str = input()
+        for proprietario in Aplicacao.listaProprietarios:
+
+            if proprietario.cpf == cpf:
+                print("Digite a data [DD/MM/AAAA]: ")
+                data: str = input()
+
+                if proprietario.alugarImovel(data):
+                    print("Casa alugada com sucesso")
+                else:
+                    print("Não foi possível alugar a casa")
+
+    @staticmethod
     def app() -> None:
         while True:
             print('-=-=-' * 15)
@@ -91,6 +107,8 @@ class Aplicacao:
                 Aplicacao.menuCadastraProprietario()
             elif opcaomenu == 2:
                 Aplicacao.menuCadastraImovel()
+            elif opcaomenu == 3:
+                Aplicacao.alugaImovel()
             elif opcaomenu == 5:
                 Aplicacao.mostraImoveis()
             elif opcaomenu == 6:

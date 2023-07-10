@@ -1,5 +1,5 @@
 from Endereco import Endereco
-from Imovel import  Imovel
+from Imovel import Imovel
 class Proprietario:
     def __init__(self, nome: str, cpf: str, identidade: str, rua: str, numero: int, cep: str, estado: str ,cidade: str):
         self._imoveis: list[Imovel] = []
@@ -59,3 +59,10 @@ class Proprietario:
 
     def mostrarImoveis(self) -> list[Imovel]:
         return self._imoveis
+
+    def alugarImovel(self, data: str) -> bool:
+        for imovel in self._imoveis:
+            if imovel.estaDisponivel(data):
+                imovel.alugarImovel(data)
+                return True
+        return False
