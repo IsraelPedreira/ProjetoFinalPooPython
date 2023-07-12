@@ -1,7 +1,9 @@
 from Endereco import Endereco
 from Imovel import Imovel
+
+
 class Proprietario:
-    def __init__(self, nome: str, cpf: str, identidade: str, rua: str, numero: int, cep: str, estado: str ,cidade: str):
+    def __init__(self, nome: str, cpf: str, identidade: str, rua: str, numero: int, cep: str, estado: str, cidade: str):
         self._imoveis: list[Imovel] = []
         self._nome: str = nome
         self._cpf: str = cpf
@@ -40,12 +42,10 @@ class Proprietario:
     def identidade(self, valor: str):
         self._identidade = valor
 
-
-    def atualizaEndereco(self, rua: str, numero: int, cep: str, estado = None, cidade = None) -> None:
+    def atualizaEndereco(self, rua: str, numero: int, cep: str, estado=None, cidade=None) -> None:
         self._endereco.rua = rua
         self._endereco.numero = numero
         self._endereco.cep = cep
-
 
         if estado is not None:
             self._endereco.estado = estado
@@ -55,7 +55,7 @@ class Proprietario:
 
     def adicionarImovel(self, imovel: Imovel) -> bool:
         self._imoveis.append(imovel)
-        return True;
+        return True
 
     def mostrarImoveis(self) -> list[Imovel]:
         return self._imoveis
@@ -64,5 +64,12 @@ class Proprietario:
         for imovel in self._imoveis:
             if imovel.estaDisponivel(data):
                 imovel.alugarImovel(data)
+                return True
+        return False
+
+    def bloquearImovel(self, data: str) -> bool:
+        for imovel in self._imoveis:
+            if imovel.estaDisponivel(data):
+                imovel.bloquearImovel(data)
                 return True
         return False

@@ -1,8 +1,10 @@
 from Endereco import Endereco
 from Agenda import Agenda
+
+
 class Imovel:
 
-    def __init__(self, numeroIPTU: float, rua: str, numero: int, cep: str, tipo: str, utilizacao: str,estado: str = 'BA', cidade: str='Salvador') -> None:
+    def __init__(self, numeroIPTU: float, rua: str, numero: int, cep: str, tipo: str, utilizacao: str, estado: str = 'BA', cidade: str = 'Salvador') -> None:
         self._numeroIPTU: float = numeroIPTU
         self._tipo: str = tipo
         self._utilizacao: str = utilizacao
@@ -45,12 +47,20 @@ class Imovel:
         self._agenda.adicionar_data_alugado(data)
         return True
 
+    def bloquearImovel(self, data: str) -> bool:
+        self._agenda.adicionar_data_bloqueado(data)
+        return True
+
     def estaDisponivel(self, data) -> bool:
         if self._agenda.obter_estado(data):
             return True
 
         return False
 
-
-
-
+    def mostraImovel(self) -> None:
+        print(f"Utilização: {self._utilizacao} ")
+        print(f"Tipo: {self._tipo} ")
+        print(f"Rua: {self._endereco.rua}")
+        print(f"Número: {self._endereco.numero} ")
+        print(f"{self._endereco.cidade} - {self._endereco.estado}")
+        print(f"{self._endereco.cep}")

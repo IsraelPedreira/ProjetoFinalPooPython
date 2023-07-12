@@ -1,11 +1,10 @@
 class Endereco:
-    def __init__(self, rua:str, numero: int, cep: str, estado: str, cidade: str ):
+    def __init__(self, rua: str, numero: int, cep: str, estado: str, cidade: str):
         self._rua: str = rua
         self._numero: int = numero
         self._cep: str = cep
         self._estado: str = estado
         self._cidade: str = cidade
-
 
     @property
     def rua(self) -> str:

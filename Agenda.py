@@ -4,11 +4,12 @@ class Agenda:
         self._datas_bloqueado = []
 
     def adicionar_data_alugado(self, data: str) -> None:
-        self._datas_alugado.append(data)
-
+        if data not in self._datas_bloqueado:
+            self._datas_alugado.append(data)
 
     def adicionar_data_bloqueado(self, data: str) -> None:
-        self._datas_bloqueado.append(data)
+        if data not in self._datas_bloqueado:
+            self._datas_bloqueado.append(data)
 
     def obter_estado(self, data: str) -> bool:
         if data in self._datas_alugado:
